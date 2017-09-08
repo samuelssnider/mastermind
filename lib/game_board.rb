@@ -8,10 +8,14 @@ class GameBoard
 	
 	
 	def board_setup(difficulty)
-		possible = ["Red", "Green", "Blue", "Yellow"]
+		possible = ["r", "g", "b", "y"]
 		difficulty.times do
 			@board << possible.sample
 		end
+	end
+	
+	def board_length
+		@board.length
 	end
 			
 		

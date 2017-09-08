@@ -9,7 +9,8 @@ class MasterMind
 	
 	def runner
 		welcome_message
-		@board = GameBoard.new
+		@game_board = GameBoard.new
+		user_start(user_command)
 		until victory
 			user_turn(user_command)
 		end
@@ -23,11 +24,12 @@ class MasterMind
 		false
 	end
 	
-	def user_turn(user_in)
+	def user_start(user_in)
 		until user_in == "p"
 			case user_in
 			when "p"
-				modes
+				placement_message
+				break
 			when "i"
 				instructions
 			when "q"
@@ -39,6 +41,18 @@ class MasterMind
 			user_in = user_command 
 		end
 	end
+	
+	def user_turn(command)
+		valids = ['r','g','b','y']
+		guess_request(@game_board.board_length)
+		until command.split(" ").count == @game_board.board_length && command.split(" ").all? {|command| valids.include?(command)}
+			invalid_guess_request
+			command = user_command
+		end
+		guess_analysis(command.split)
+	end
+	
+	def guess_analysis
 	
 		
 end
